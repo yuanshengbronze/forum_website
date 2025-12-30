@@ -2,7 +2,7 @@ import ThreadView from "../components/ThreadView";
 const Tech = () => {
   return (
     <div>
-      <ThreadView thread="Tech" />
+      <ThreadView threadId={2} />
     </div>
   );
 };

@@ -13,7 +13,7 @@ type Props = {
   thread: string;
 };
 
-export default function MediaCard({
+export default function ThreadCard({
   title,
   description,
   imagelink,

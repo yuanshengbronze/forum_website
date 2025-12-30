@@ -1,24 +1,15 @@
-import React from "react";
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { blue, orange } from "@mui/material/colors";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./pages/Home";
-import Movies from "./pages/movies";
-import Tech from "./pages/tech";
-import Gossip from "./pages/gossip";
+import Movies from "./pages/Movies";
+import Tech from "./pages/Tech";
+import Gossip from "./pages/Gossip";
 
-const theme = createTheme({
-  palette: {
-    primary: blue,
-    secondary: orange,
-  },
-});
-
+const queryClient = new QueryClient();
 const App = () => {
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
+    <div>
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -27,7 +18,7 @@ const App = () => {
             <Route path="/movies" element={<Movies />} />
           </Routes>
         </BrowserRouter>
-      </ThemeProvider>
+      </QueryClientProvider>
     </div>
   );
 };

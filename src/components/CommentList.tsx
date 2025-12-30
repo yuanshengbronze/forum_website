@@ -1,10 +1,5 @@
 import CommentItem from "./CommentItem";
-
-type Comment = {
-  body: string;
-  author: string;
-  timestamp: Date;
-};
+import Comment from "../types/Comment";
 
 type Props = {
   comments: Comment[];

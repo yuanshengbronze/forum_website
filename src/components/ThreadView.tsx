@@ -1,39 +1,23 @@
+import { useComments } from "../services/queries";
 import CommentAdd from "./CommentAdd";
 import CommentList from "./CommentList";
 type Props = {
-  thread: string;
+  threadId: number;
 };
 
-const ThreadView = ({ thread }: Props) => {
+const ThreadView = ({ threadId }: Props) => {
+  const { data: comments, isLoading, error } = useComments(threadId);
+  if (isLoading) {
+    return <p> Loading comments... </p>;
+  }
+  if (error) {
+    return <p> Error </p>;
+  }
   return (
     <div>
-      <h1> {thread} </h1>
-      <CommentList
-        comments={[
-          {
-            body:
-              "Any fool can write code that a computer can understand.\n" +
-              "Good programmers write code that humans can understand.\n" +
-              " ~ Martin Fowler",
-            author: "Benedict",
-            timestamp: new Date(2022, 10, 28, 10, 33, 30),
-          },
-          {
-            body:
-              "Code reuse is the Holy Grail of Software Engineering.\n" +
-              " ~ Douglas Crockford",
-            author: "Casey",
-            timestamp: new Date(2022, 11, 1, 11, 11, 11),
-          },
-          {
-            body:
-              "Nine people can't make a baby in a month.\n" + " ~ Fred Brooks",
-            author: "Duuet",
-            timestamp: new Date(2022, 11, 2, 10, 30, 0),
-          },
-        ]}
-      />
-      <CommentAdd />
+      <h1> Thread {threadId} </h1>
+      <CommentList comments={comments || []} />
+      <CommentAdd threadId={threadId} />
     </div>
   );
 };

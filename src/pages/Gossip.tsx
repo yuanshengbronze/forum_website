@@ -3,7 +3,7 @@ import ThreadView from "../components/ThreadView";
 const Gossip = () => {
   return (
     <div>
-      <ThreadView thread="Gossip" />
+      <ThreadView threadId={3} />
     </div>
   );
 };

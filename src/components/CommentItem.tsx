@@ -1,11 +1,6 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
-type Comment = {
-  body: string;
-  author: string;
-  timestamp: Date;
-};
+import Comment from "../types/Comment";
 
 type Props = {
   comment: Comment;

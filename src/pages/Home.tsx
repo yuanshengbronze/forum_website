@@ -12,6 +12,7 @@ const Home = () => {
       >
         <h3> Simple Forum </h3>
       </div>
+      <br /> <br /> <br /> <br />
       <div>
         <ThreadList />
       </div>
