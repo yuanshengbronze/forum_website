@@ -9,7 +9,7 @@ const CommentList = ({ comments }: Props) => {
   return (
     <ul>
       {comments.map((comment) => (
-        <CommentItem comment={comment} key="" />
+        <CommentItem comment={comment} key={`${comment.commentId}`} />
       ))}
     </ul>
   );

@@ -1,4 +1,4 @@
-import ThreadList from "../components/ThreadList";
+import ThreadOverview from "../components/ThreadOverview";
 const Home = () => {
   return (
     <>
@@ -14,7 +14,7 @@ const Home = () => {
       </div>
       <br /> <br /> <br /> <br />
       <div>
-        <ThreadList />
+        <ThreadOverview />
       </div>
     </>
   );

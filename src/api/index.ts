@@ -1,12 +1,22 @@
-// src/services/mockApi.ts
 import Comment  from "../types/Comment";
 import Thread from "../types/Thread";
 
-// In-memory mock data
 const threads: Thread[] = [
-  { threadId: 1, title: "Movies" },
-  { threadId: 2, title: "Tech" },
-  {threadId: 3, title: "Gossip"}
+  { threadId: 1, 
+    title: "Movies", 
+    description: "Absolute Cinema",
+    author: "Christopher Nolan",
+    timestamp: new Date(2022, 10, 28, 10, 33, 30)},
+  { threadId: 2, 
+    title: "Tech",
+    description: "For all you nerds out there",
+    author: "Elon Musk",
+    timestamp: new Date(2023, 10, 28, 10, 33, 30)},
+  { threadId: 3, 
+    title: "Gossip",
+    description: "Spill all the tea here!",
+    author: "MrBeast",
+    timestamp: new Date(2021, 5, 28, 10, 33, 30)}
 ];
 
 const comments: Comment[] = [
@@ -33,30 +43,25 @@ const comments: Comment[] = [
   },
 ];
 
-// Simulate network delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/**
- * Mock function to fetch threads
- */
+export const fetchThread = async(threadId: number): Promise<Thread | undefined> => {
+  await delay(500);
+  return threads.find((t) => t.threadId === threadId);
+}
+
 export const fetchThreads = async (): Promise<Thread[]> => {
   await delay(500);
   console.log("Fetched threads");
   return [...threads];
 };
 
-/**
- * Mock function to fetch comments for a thread
- */
 export const fetchComments = async (threadId: number): Promise<Comment[]> => {
   await delay(500);
   console.log(`Fetched comments for thread ${threadId}`);
   return comments.filter((c) => c.threadId === threadId);
 };
 
-/**
- * Mock function to add a comment
- */
 export const addComment = async (
   threadId: number,
   comment: Pick<Comment, "body" | "author">
@@ -76,3 +81,20 @@ export const addComment = async (
 
   return newComment;
 };
+
+export const addThread = async (
+  thread: Pick<Thread, "title"|"author"|"description">
+): Promise<Thread> => {
+  await delay(500);
+
+  const newThread: Thread = {
+    threadId: threads.length + 1,
+    title: thread.title,
+    description: thread.description,
+    author: thread.author,
+    timestamp: new Date(),
+  };
+
+  threads.push(newThread);
+  return newThread;
+}

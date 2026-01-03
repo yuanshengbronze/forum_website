@@ -1,50 +1,68 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+import CardActionArea from "@mui/material/CardActionArea";
+import { makeStyles } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router";
+import { useThread } from "../services/queries";
 
 type Props = {
-  title: string;
-  description: string;
-  imagelink: string;
-  thread: string;
+  threadId: number;
 };
 
-export default function ThreadCard({
-  title,
-  description,
-  imagelink,
-  thread,
-}: Props) {
+const useStyles = makeStyles(() => ({
+  commentBody: {
+    fontSize: 16,
+    whiteSpace: "pre-wrap",
+    paddingBottom: "1em",
+  },
+  commentCard: {
+    marginBottom: "1em",
+  },
+  metadata: {
+    fontSize: 14,
+  },
+}));
+
+export default function ThreadCard({ threadId }: Props) {
   const Navigate = useNavigate();
+  const { data: thread } = useThread(threadId);
+  const classes = useStyles();
 
-  function onClick() {
-    Navigate(`/${thread}`);
+  if (thread !== undefined) {
+    function onClick() {
+      Navigate(`/${thread?.threadId}`);
+    }
+
+    return (
+      <Card classes={classes.commentCard}>
+        <CardActionArea
+          onClick={onClick}
+          sx={{
+            height: "100%",
+            "&[data-active]": {
+              backgroundColor: "action.selected",
+              "&:hover": {
+                backgroundColor: "action.selectedHover",
+              },
+            },
+          }}
+        >
+          <CardContent>
+            <Typography gutterBottom variant="body2" component="div">
+              {thread.author} - {thread.timestamp.toLocaleString()}
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div">
+              {thread.title}
+            </Typography>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              {thread.description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    );
+  } else {
+    return <h1> Error </h1>;
   }
-
-  return (
-    <Card sx={{ maxWidth: 300 }}>
-      <CardMedia
-        sx={{ height: 120 }}
-        image={`${imagelink}`}
-        title={`Image of ${title}`}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={onClick}>
-          Open Thread
-        </Button>
-      </CardActions>
-    </Card>
-  );
 }
