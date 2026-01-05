@@ -56,7 +56,7 @@ export default function ThreadCard({ threadId }: Props) {
               {thread.title}
             </Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {thread.description}
+              {thread.body}
             </Typography>
           </CardContent>
         </CardActionArea>

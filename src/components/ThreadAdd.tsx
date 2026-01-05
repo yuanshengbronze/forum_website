@@ -4,7 +4,7 @@ import { Button, TextField, Box } from "@mui/material";
 import { useAddThread } from "../services/mutations";
 const loginSchema = z.object({
   title: z.string(),
-  description: z.string(),
+  body: z.string(),
   author: z.string(),
 });
 
@@ -13,9 +13,9 @@ type TLoginFormSchema = z.infer<typeof loginSchema>;
 const ThreadAdd = () => {
   const mutation = useAddThread();
   const { register, handleSubmit, reset } = useForm<TLoginFormSchema>();
-  const onSubmit = handleSubmit(({ title, description, author }) => {
+  const onSubmit = handleSubmit(({ title, body, author }) => {
     mutation.mutate(
-      { thread: { author, title, description } },
+      { thread: { author, title, body } },
       {
         onSuccess: () => {
           reset();
@@ -47,12 +47,12 @@ const ThreadAdd = () => {
         {...register("title")}
       />
       <TextField
-        id="description"
+        id="body"
         required
         multiline
-        label="Thread Description (required)"
+        label="Body (required)"
         variant="filled"
-        {...register("description")}
+        {...register("body")}
       />
       <Button type="submit" variant="contained">
         Submit

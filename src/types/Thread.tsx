@@ -1,7 +1,7 @@
 type Thread = {
   threadId: number;
   title: string;
-  description: string;
+  body: string;
   author: string;
   timestamp: Date;
 };

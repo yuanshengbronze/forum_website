@@ -8,7 +8,7 @@ type AddCommentVariables = {
 }
 
 type AddThreadVariables = {
-    thread: Pick<Thread, "author"|"description"|"title">
+    thread: Pick<Thread, "author"|"body"|"title">
 }
 
 export const useAddComment = () => {

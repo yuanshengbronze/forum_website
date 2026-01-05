@@ -4,17 +4,17 @@ import Thread from "../types/Thread";
 const threads: Thread[] = [
   { threadId: 1, 
     title: "Movies", 
-    description: "Absolute Cinema",
+    body: "Absolute Cinema",
     author: "Christopher Nolan",
     timestamp: new Date(2022, 10, 28, 10, 33, 30)},
   { threadId: 2, 
     title: "Tech",
-    description: "For all you nerds out there",
+    body: "For all you nerds out there",
     author: "Elon Musk",
     timestamp: new Date(2023, 10, 28, 10, 33, 30)},
   { threadId: 3, 
     title: "Gossip",
-    description: "Spill all the tea here!",
+    body: "Spill all the tea here!",
     author: "MrBeast",
     timestamp: new Date(2021, 5, 28, 10, 33, 30)}
 ];
@@ -83,14 +83,14 @@ export const addComment = async (
 };
 
 export const addThread = async (
-  thread: Pick<Thread, "title"|"author"|"description">
+  thread: Pick<Thread, "title"|"author"|"body">
 ): Promise<Thread> => {
   await delay(500);
 
   const newThread: Thread = {
     threadId: threads.length + 1,
     title: thread.title,
-    description: thread.description,
+    body: thread.body,
     author: thread.author,
     timestamp: new Date(),
   };
